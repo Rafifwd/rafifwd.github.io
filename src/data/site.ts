@@ -163,6 +163,7 @@ export const site = {
         'JavaScript (ES6+)',
         'Axios',
       ],
+      live: 'https://ugssukabumi.com',
     },
   ] satisfies Project[],
 
