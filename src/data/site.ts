@@ -97,7 +97,7 @@ export const site = {
       { command: 'whoami', value: 'rafif — AI/ML + full-stack' },
       {
         command: 'currently',
-        value: 'CS @ Unpad · Project Officer @ IFEST 2026',
+        value: 'CS @ Unpad · former PO, IFEST 2026',
       },
       {
         command: 'focus',
@@ -182,7 +182,7 @@ export const site = {
         label: 'Focus',
         value: 'Explainable ML · full-stack product engineering',
       },
-      { label: 'Current leadership', value: 'Project Officer, IFEST 2026' },
+      { label: 'Leadership', value: 'Project Officer, IFEST 2026' },
     ] satisfies Fact[],
     capabilities: [
       {
@@ -225,11 +225,11 @@ export const site = {
     {
       org: 'Informatics Festival (IFEST) 2026',
       title: 'Project Officer',
-      dates: 'May 2026 – Present',
+      dates: 'May 2026 – Oct 2026',
       location: 'Bandung, West Java',
       contribution:
-        'Leading the organizing committee: setting strategic direction, aligning division goals, and overseeing project execution.',
-      current: true,
+        'Led the organizing committee: setting strategic direction, aligning division goals, and overseeing project execution.',
+      current: false,
     },
     {
       org: 'LinkToWork (previously Pathseeker) by Magna Partners',
@@ -238,6 +238,7 @@ export const site = {
       location: 'Sumedang, West Java',
       contribution:
         'Supported planning and execution of 3+ organizational projects by gathering requirements, coordinating stakeholders, and maintaining project information.',
+      current: false,
     },
     {
       org: 'Training of Motivation (TOM)',
@@ -246,6 +247,7 @@ export const site = {
       location: 'Tegal, Central Java',
       contribution:
         'Coordinated logistics and volunteer teams for a program guiding high school students toward higher education.',
+      current: false,
     },
     {
       org: 'Informatics Festival (IFEST) 2025',
@@ -254,6 +256,7 @@ export const site = {
       location: 'Bandung, West Java',
       contribution:
         'Oversaw four divisions—Technopreneur, National Seminar, Event Management, and IT Competition—and managed key timelines.',
+      current: false,
     },
   ] satisfies ExperienceItem[],
 
