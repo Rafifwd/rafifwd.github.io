@@ -1,0 +1,39 @@
+---
+import { site } from "../data/site";
+import TerminalCard from "./TerminalCard.astro";
+
+const { hero } = site;
+const titleLead = hero.title.slice(0, hero.title.indexOf(hero.titleAccent)).trimEnd();
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">{hero.eyebrow}</p>
+
+      <h1 id="hero-title">
+        {titleLead} <span class="accent">{hero.titleAccent}</span>
+      </h1>
+
+      <p class="hero-sub">{hero.subtitle}</p>
+
+      <p class="availability">
+        <span class="availability-dot" aria-hidden="true"></span>
+        {hero.availability}
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={hero.ctas.work.href}>
+          {hero.ctas.work.label}
+          <span class="arrow" aria-hidden="true">↓</span>
+        </a>
+        <a class="btn btn-secondary" href={hero.ctas.email.href}>
+          {hero.ctas.email.label}
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <TerminalCard />
+  </div>
+</section>

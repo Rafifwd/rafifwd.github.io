@@ -1,0 +1,49 @@
+---
+import { site } from "../data/site";
+
+const { about } = site;
+---
+
+<section class="section" id="about" aria-labelledby="about-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="section-label">About</p>
+        <h2 id="about-title">From model to product</h2>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-copy">
+        {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+
+      <dl class="facts">
+        {
+          about.facts.map((fact) => (
+            <div class="fact">
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="capabilities">
+      {
+        about.capabilities.map((capability) => (
+          <article class="capability">
+            <h3>{capability.title}</h3>
+            <p>{capability.description}</p>
+            <ul>
+              {capability.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

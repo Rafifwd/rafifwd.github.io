@@ -1,0 +1,39 @@
+---
+import { site } from "../data/site";
+---
+
+<section class="section" id="experience" aria-labelledby="experience-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="section-label">Experience</p>
+        <h2 id="experience-title">The product and ops side</h2>
+      </div>
+      <p class="section-note">
+        Leadership and operations work that shaped how I build with teams.
+      </p>
+    </div>
+
+    <ol class="timeline">
+      {
+        site.experience.map((item) => (
+          <li class:list={["timeline-item", { current: item.current }]}>
+            <div class="timeline-top">
+              <h3 class="timeline-title">
+                {item.title}
+                {item.current && <span class="current-tag">Current</span>}
+              </h3>
+              <span class="timeline-dates">{item.dates}</span>
+            </div>
+            <p class="timeline-org">
+              {item.org}
+              <span class="sep" aria-hidden="true">/</span>
+              {item.location}
+            </p>
+            <p class="timeline-contribution">{item.contribution}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
