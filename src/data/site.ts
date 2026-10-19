@@ -50,7 +50,7 @@ export const site = {
   portfolio: 'https://rafifwd.github.io',
   location: 'Bandung, West Java, Indonesia',
   timezone: 'GMT+7',
-  availability: 'Open to freelance & collaborations',
+  availability: 'Seeking an AI/ML or full-stack internship',
 
   meta: {
     title: 'Muhammad Rafif Widyadhana — AI/ML & Full-Stack Engineer',
@@ -85,7 +85,7 @@ export const site = {
     titleAccent: 'real products.',
     subtitle:
       'CS undergrad at Universitas Padjadjaran building explainable ML systems and the full-stack products around them—from risk scoring engines to the dashboards people use.',
-    availability: 'Open to freelance & collaborations',
+    availability: 'Seeking an internship · freelance welcome',
     ctas: {
       work: { label: 'View selected work', href: '#work' },
       email: {
@@ -103,7 +103,7 @@ export const site = {
         command: 'focus',
         value: 'explainable ML · full-stack products',
       },
-      { command: 'status', value: 'open to freelance' },
+      { command: 'status', value: 'seeking internship · freelance welcome' },
     ] satisfies TerminalLine[],
   },
 
@@ -262,7 +262,7 @@ export const site = {
 
   contact: {
     title: "Let's build something useful.",
-    copy: 'Open to freelance projects, collaborations, and AI/product work. Best fit: ML-powered products, full-stack web apps, and data-driven dashboards.',
+    copy: 'Currently seeking an AI/ML or full-stack internship. Freelance projects are welcome too. Best fit: ML-powered products, full-stack web apps, and data-driven dashboards.',
     cta: 'Email me',
   },
 
