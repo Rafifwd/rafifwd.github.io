@@ -4,14 +4,34 @@ import { site } from "../data/site";
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <span>© {site.footer.year} {site.name}</span>
-    <span>
+    <p>© {site.footer.year} {site.name}</p>
+
+    <p class="footer-built">
       Built with
       <a href="https://astro.build" target="_blank" rel="noopener noreferrer">
         {site.footer.builtWith}
+        <span class="sr-only"> (opens in a new tab)</span>
       </a>
       <span class="footer-sep" aria-hidden="true">·</span>
       {site.footer.location}
-    </span>
+    </p>
+
+    <a class="back-to-top" href="#top">
+      Back to top
+      <svg
+        class="icon"
+        viewBox="0 0 12 12"
+        fill="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          d="M6 10V2M2.5 5.5 6 2l3.5 3.5"
+          stroke="currentColor"
+          stroke-width="1.25"
+          stroke-linecap="square"
+        ></path>
+      </svg>
+    </a>
   </div>
 </footer>

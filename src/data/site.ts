@@ -13,6 +13,7 @@ export interface Project {
   description: string;
   stack: string[];
   live?: string;
+  figure: string;
 }
 
 export interface ExperienceItem {
@@ -58,7 +59,7 @@ export const site = {
       'AI/ML engineer and full-stack product builder. CS undergraduate at Universitas Padjadjaran building explainable ML systems and the products around them.',
     canonical: 'https://rafifwd.github.io/',
     ogImage: 'https://rafifwd.github.io/og.png',
-    themeColor: '#08090A',
+    themeColor: '#F4EFE6',
   },
 
   links: {
@@ -92,6 +93,18 @@ export const site = {
         label: 'Email me',
         href: 'mailto:rafifwidyadhanaaa@gmail.com',
       },
+    },
+    model: {
+      label: 'MODEL CARD',
+      year: '2026',
+      rows: [
+        { label: 'role', value: 'AI/ML + full-stack' },
+        { label: 'base', value: 'Bandung, ID · GMT+7' },
+        { label: 'focus', value: 'Explainable ML / product engineering' },
+        { label: 'stack', value: 'Python · FastAPI · React · TypeScript' },
+      ],
+      pipeline: ['DATA', 'MODEL', 'EXPLAIN', 'INTERFACE'],
+      caption: 'From data to decision.',
     },
     terminal: [
       { command: 'whoami', value: 'rafif — AI/ML + full-stack' },
@@ -136,6 +149,7 @@ export const site = {
         'Python',
       ],
       live: 'https://malaria-watch.vercel.app/',
+      figure: 'SURVEILLANCE RISK FIELD',
     },
     {
       index: '02',
@@ -147,6 +161,7 @@ export const site = {
         'Career reasoning system combining rule-based and machine-learning scoring, dynamic skill-weight logic, a FastAPI backend, and SHAP-based explainable AI for narrative career recommendations.',
       stack: ['FastAPI', 'Scikit-learn', 'SHAP', 'Pandas', 'NumPy', 'Python'],
       live: 'https://nalaraitest.vercel.app/',
+      figure: 'EXPLAINED RECOMMENDATION',
     },
     {
       index: '03',
@@ -164,6 +179,7 @@ export const site = {
         'Axios',
       ],
       live: 'https://ugssukabumi.com',
+      figure: 'REGISTRATION FLOW',
     },
   ] satisfies Project[],
 

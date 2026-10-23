@@ -1,0 +1,338 @@
+---
+interface Props {
+  index: string;
+  label: string;
+  slug: string;
+}
+
+const { index, label, slug } = Astro.props;
+
+const gridCols = 12;
+const gridRows = 9;
+const cellSize = 24;
+const cellGap = 5;
+const gridX = 36;
+const gridY = 72;
+const accentCells = new Set(["2-2", "7-4", "9-6"]);
+
+const cells = Array.from({ length: gridRows * gridCols }, (_, i) => {
+  const row = Math.floor(i / gridCols);
+  const col = i % gridCols;
+  const seed = (row * 7 + col * 3 + ((row * col) % 5)) % 11;
+
+  return {
+    x: gridX + col * (cellSize + cellGap),
+    y: gridY + row * (cellSize + cellGap),
+    opacity: 0.05 + seed * 0.038,
+    accent: accentCells.has(`${col}-${row}`),
+  };
+});
+
+const shapRows = [
+  { label: "skills match", width: 150, tone: "accent" },
+  { label: "role experience", width: 116, tone: "accent" },
+  { label: "education", width: 84, tone: "ink" },
+  { label: "portfolio depth", width: 52, tone: "soft" },
+  { label: "location", width: 68, tone: "outline" },
+  { label: "domain shift", width: 48, tone: "outline" },
+];
+
+const tickets = [
+  { x: 32, number: "01", accent: false },
+  { x: 210, number: "02", accent: true },
+  { x: 388, number: "03", accent: false },
+];
+
+const seatDots = Array.from({ length: 15 }, (_, i) => ({
+  x: 226 + (i % 5) * 14,
+  y: 206 + Math.floor(i / 5) * 14,
+}));
+---
+
+<figure class="project-figure">
+  <div class="project-figure-frame">
+    {
+      slug === "awasjentik" && (
+        <svg
+          class="figure-svg"
+          viewBox="0 0 560 420"
+          role="img"
+          aria-labelledby="fig-awasjentik-title fig-awasjentik-desc"
+        >
+          <title id="fig-awasjentik-title">Surveillance risk field</title>
+          <desc id="fig-awasjentik-desc">
+            An abstract twelve by nine grid of risk cells with varying ink
+            density. Three cells are highlighted in accent. A river path crosses
+            the field, with a small legend and a trend sparkline.
+          </desc>
+
+          <text x="36" y="42" class="fig-title">
+            SURVEILLANCE / RISK FIELD
+          </text>
+          <text x="524" y="42" class="fig-label" text-anchor="end">
+            ABSTRACT
+          </text>
+
+          <clipPath id="risk-field-clip">
+            <rect x="32" y="68" width="352" height="264" />
+          </clipPath>
+
+          <g clip-path="url(#risk-field-clip)">
+            {cells.map((cell) => (
+              <rect
+                class={
+                  cell.accent
+                    ? "fig-cell fig-cell-accent"
+                    : "fig-cell"
+                }
+                x={cell.x}
+                y={cell.y}
+                width={cellSize}
+                height={cellSize}
+                style={`fill-opacity:${cell.accent ? 0.9 : cell.opacity}`}
+              />
+            ))}
+            <path
+              class="fig-river"
+              d="M20 240C120 200 160 250 226 262S340 238 400 286"
+            />
+          </g>
+
+          <g class="fig-legend">
+            <rect
+              class="fig-cell"
+              x="36"
+              y="368"
+              width="8"
+              height="8"
+              style="fill-opacity:0.12"
+            />
+            <text x="50" y="376" class="fig-label-sm">LOW</text>
+            <rect
+              class="fig-cell"
+              x="104"
+              y="368"
+              width="8"
+              height="8"
+              style="fill-opacity:0.42"
+            />
+            <text x="118" y="376" class="fig-label-sm">HIGH</text>
+            <rect
+              class="fig-cell fig-cell-accent"
+              x="178"
+              y="368"
+              width="8"
+              height="8"
+              style="fill-opacity:0.9"
+            />
+            <text x="192" y="376" class="fig-label-sm">FLAGGED</text>
+          </g>
+
+          <g class="fig-sparkline">
+            <text x="390" y="344" class="fig-label-sm">SIGNAL</text>
+            <line class="fig-hairline" x1="390" y1="382" x2="524" y2="382" />
+            <polyline
+              class="fig-spark"
+              points="390,372 412,366 434,370 456,356 478,362 500,350 522,355"
+            />
+            <circle class="fig-spark-dot" cx="522" cy="355" r="2.5" />
+          </g>
+        </svg>
+      )
+    }
+
+    {
+      slug === "nalarpath-ai" && (
+        <svg
+          class="figure-svg"
+          viewBox="0 0 560 420"
+          role="img"
+          aria-labelledby="fig-nalarpath-title fig-nalarpath-desc"
+        >
+          <title id="fig-nalarpath-title">Explained recommendation</title>
+          <desc id="fig-nalarpath-desc">
+            A SHAP-style contribution chart. Six feature labels sit beside
+            horizontal bars around a centre baseline. Two positive
+            contributions are highlighted in accent, while negative
+            contributions are drawn in outline.
+          </desc>
+
+          <text x="36" y="42" class="fig-title">
+            EXPLAINED / RECOMMENDATION
+          </text>
+          <text x="524" y="42" class="fig-label" text-anchor="end">
+            SHAP-STYLE
+          </text>
+
+          <line class="fig-baseline" x1="300" y1="72" x2="300" y2="364" />
+
+          {shapRows.map((row, i) => {
+            const y = 94 + i * 48;
+            const isNegative = row.tone === "outline";
+
+            return (
+              <g>
+                <text x="36" y={y + 13} class="fig-label">
+                  {row.label}
+                </text>
+                {isNegative ? (
+                  <rect
+                    class="fig-bar-outline"
+                    x={300 - row.width}
+                    y={y}
+                    width={row.width}
+                    height="18"
+                  />
+                ) : (
+                  <rect
+                    class={
+                      row.tone === "accent"
+                        ? "fig-bar fig-bar-accent"
+                        : row.tone === "soft"
+                          ? "fig-bar fig-bar-soft"
+                          : "fig-bar"
+                    }
+                    x="300"
+                    y={y}
+                    width={row.width}
+                    height="18"
+                  />
+                )}
+              </g>
+            );
+          })}
+
+          <text x="232" y="390" class="fig-label-sm" text-anchor="end">
+            LOWER
+          </text>
+          <text x="300" y="390" class="fig-label-sm" text-anchor="middle">
+            BASELINE
+          </text>
+          <text x="460" y="390" class="fig-label-sm">
+            HIGHER
+          </text>
+        </svg>
+      )
+    }
+
+    {
+      slug === "unpad-goes-to-school-sukabumi" && (
+        <svg
+          class="figure-svg"
+          viewBox="0 0 560 420"
+          role="img"
+          aria-labelledby="fig-unpad-title fig-unpad-desc"
+        >
+          <title id="fig-unpad-title">Registration flow</title>
+          <desc id="fig-unpad-desc">
+            Three editorial ticket stubs for register, confirm, and attend,
+            connected by hairline arrows. The middle ticket is highlighted in
+            accent and carries a seat-dot grid.
+          </desc>
+
+          <text x="36" y="42" class="fig-title">
+            REGISTRATION / FLOW
+          </text>
+          <text x="524" y="42" class="fig-label" text-anchor="end">
+            THREE STEPS
+          </text>
+
+          {tickets.map((ticket, i) => (
+            <g>
+              <rect
+                class={
+                  ticket.accent ? "fig-ticket fig-ticket-accent" : "fig-ticket"
+                }
+                x={ticket.x}
+                y="84"
+                width="140"
+                height="190"
+              />
+              <circle
+                class="fig-notch"
+                cx={ticket.x + 100}
+                cy="84"
+                r="7"
+              />
+              <circle
+                class="fig-notch"
+                cx={ticket.x + 100}
+                cy="274"
+                r="7"
+              />
+              <line
+                class="fig-perf"
+                x1={ticket.x + 100}
+                y1="102"
+                x2={ticket.x + 100}
+                y2="256"
+              />
+              <text
+                class={
+                  ticket.accent ? "fig-serif fig-accent" : "fig-serif"
+                }
+                x={ticket.x + 16}
+                y="166"
+              >
+                {ticket.number}
+              </text>
+
+              {i === 1 ? (
+                <g class="fig-seats">
+                  {seatDots.map((dot) => (
+                    <circle class="fig-dot" cx={dot.x} cy={dot.y} r="2.3" />
+                  ))}
+                </g>
+              ) : (
+                <g class="fig-ticket-lines">
+                  <line
+                    class="fig-hairline"
+                    x1={ticket.x + 16}
+                    y1="206"
+                    x2={ticket.x + 84}
+                    y2="206"
+                  />
+                  <line
+                    class="fig-hairline"
+                    x1={ticket.x + 16}
+                    y1="220"
+                    x2={ticket.x + 72}
+                    y2="220"
+                  />
+                  <line
+                    class="fig-hairline"
+                    x1={ticket.x + 16}
+                    y1="234"
+                    x2={ticket.x + 78}
+                    y2="234"
+                  />
+                </g>
+              )}
+            </g>
+          ))}
+
+          <g class="fig-ticket-arrows">
+            <path class="fig-arrow" d="M176 322h26" />
+            <path class="fig-arrow" d="M196 317l6 5-6 5" />
+            <path class="fig-arrow" d="M354 322h26" />
+            <path class="fig-arrow" d="M374 317l6 5-6 5" />
+          </g>
+
+          <text x="102" y="350" class="fig-label" text-anchor="middle">
+            register
+          </text>
+          <text x="280" y="350" class="fig-label" text-anchor="middle">
+            confirm
+          </text>
+          <text x="458" y="350" class="fig-label" text-anchor="middle">
+            attend
+          </text>
+        </svg>
+      )
+    }
+  </div>
+
+  <figcaption class="project-figure-caption">
+    FIG. {index} — {label}
+  </figcaption>
+</figure>

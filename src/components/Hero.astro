@@ -1,39 +1,76 @@
 ---
 import { site } from "../data/site";
-import TerminalCard from "./TerminalCard.astro";
+import ModelCard from "./ModelCard.astro";
 
 const { hero } = site;
-const titleLead = hero.title.slice(0, hero.title.indexOf(hero.titleAccent)).trimEnd();
+const comma = hero.title.indexOf(",");
+const lineOne = hero.title.slice(0, comma + 1);
+const remainder = hero.title.slice(comma + 1).trimStart();
+const accentIndex = remainder.indexOf(hero.titleAccent);
+const lineTwo = remainder.slice(0, accentIndex).trimEnd();
+const lineThree = remainder.slice(accentIndex);
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow">{hero.eyebrow}</p>
+    <div class="hero-copy">
+      <p class="eyebrow" data-reveal>{hero.eyebrow}</p>
 
-      <h1 id="hero-title">
-        {titleLead} <span class="accent">{hero.titleAccent}</span>
+      <h1 id="hero-title" data-reveal style="--i: 1">
+        <span class="hero-line">{lineOne}</span>
+        <span class="hero-line">{lineTwo}</span>
+        <span class="hero-line"
+          ><em class="hero-accent">{lineThree}</em></span
+        >
       </h1>
 
-      <p class="hero-sub">{hero.subtitle}</p>
+      <p class="hero-sub" data-reveal style="--i: 2">{hero.subtitle}</p>
 
-      <p class="availability">
+      <p class="availability" data-reveal style="--i: 3">
         <span class="availability-dot" aria-hidden="true"></span>
         {hero.availability}
       </p>
 
-      <div class="hero-actions">
-        <a class="btn btn-primary" href={hero.ctas.work.href}>
+      <div class="hero-actions" data-reveal style="--i: 4">
+        <a class="btn-primary" href={hero.ctas.work.href}>
           {hero.ctas.work.label}
-          <span class="arrow" aria-hidden="true">↓</span>
+          <svg
+            class="icon"
+            viewBox="0 0 12 12"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M6 2v8M2.5 6.5 6 10l3.5-3.5"
+              stroke="currentColor"
+              stroke-width="1.25"
+              stroke-linecap="square"
+            ></path>
+          </svg>
         </a>
-        <a class="btn btn-secondary" href={hero.ctas.email.href}>
+        <a class="btn-secondary" href={hero.ctas.email.href}>
           {hero.ctas.email.label}
-          <span class="arrow" aria-hidden="true">↗</span>
+          <svg
+            class="icon"
+            viewBox="0 0 12 12"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M3.5 8.5 8.5 3.5M4.5 3.5h4v4"
+              stroke="currentColor"
+              stroke-width="1.25"
+              stroke-linecap="square"
+            ></path>
+          </svg>
         </a>
       </div>
     </div>
 
-    <TerminalCard />
+    <div class="hero-aside" data-reveal style="--i: 2">
+      <ModelCard />
+    </div>
   </div>
 </section>

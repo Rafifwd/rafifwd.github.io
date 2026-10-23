@@ -6,22 +6,26 @@ const { about } = site;
 
 <section class="section" id="about" aria-labelledby="about-title">
   <div class="wrap">
-    <div class="section-head">
-      <div>
-        <p class="section-label">About</p>
+    <div class="section-head" data-reveal>
+      <div class="section-head-main">
+        <p class="section-label">
+          <span class="section-label-num">02</span>
+          <span aria-hidden="true">/</span>
+          About
+        </p>
         <h2 id="about-title">From model to product</h2>
       </div>
     </div>
 
     <div class="about-grid">
-      <div class="about-copy">
+      <div class="about-copy" data-reveal>
         {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       </div>
 
-      <dl class="facts">
+      <dl class="about-facts" data-reveal style="--i: 1">
         {
           about.facts.map((fact) => (
-            <div class="fact">
+            <div class="about-fact">
               <dt>{fact.label}</dt>
               <dd>{fact.value}</dd>
             </div>
@@ -32,8 +36,15 @@ const { about } = site;
 
     <div class="capabilities">
       {
-        about.capabilities.map((capability) => (
-          <article class="capability">
+        about.capabilities.map((capability, index) => (
+          <article
+            class="capability"
+            data-reveal
+            style={`--i: ${index}`}
+          >
+            <span class="capability-index" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
             <h3>{capability.title}</h3>
             <p>{capability.description}</p>
             <ul>
