@@ -12,65 +12,72 @@ const lineThree = remainder.slice(accentIndex);
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow" data-reveal>{hero.eyebrow}</p>
-
-      <h1 id="hero-title" data-reveal style="--i: 1">
-        <span class="hero-line">{lineOne}</span>
-        <span class="hero-line">{lineTwo}</span>
-        <span class="hero-line"
-          ><em class="hero-accent">{lineThree}</em></span
-        >
-      </h1>
-
-      <p class="hero-sub" data-reveal style="--i: 2">{hero.subtitle}</p>
-
-      <p class="availability" data-reveal style="--i: 3">
-        <span class="availability-dot" aria-hidden="true"></span>
-        {hero.availability}
+  <div class="wrap">
+    <div class="hero-topline">
+      <p class="section-label">
+        <span class="section-label-num">01</span>
+        <span aria-hidden="true">/</span>
+        Intro
       </p>
-
-      <div class="hero-actions" data-reveal style="--i: 4">
-        <a class="btn-primary" href={hero.ctas.work.href}>
-          {hero.ctas.work.label}
-          <svg
-            class="icon"
-            viewBox="0 0 12 12"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="M6 2v8M2.5 6.5 6 10l3.5-3.5"
-              stroke="currentColor"
-              stroke-width="1.25"
-              stroke-linecap="square"
-            ></path>
-          </svg>
-        </a>
-        <a class="btn-secondary" href={hero.ctas.email.href}>
-          {hero.ctas.email.label}
-          <svg
-            class="icon"
-            viewBox="0 0 12 12"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="M3.5 8.5 8.5 3.5M4.5 3.5h4v4"
-              stroke="currentColor"
-              stroke-width="1.25"
-              stroke-linecap="square"
-            ></path>
-          </svg>
-        </a>
-      </div>
+      <p class="hero-eyebrow">{hero.eyebrow}</p>
     </div>
 
-    <div class="hero-aside" data-reveal style="--i: 2">
-      <ModelCard />
+    <h1 id="hero-title">
+      <span class="hero-line">{lineOne}</span>
+      <span class="hero-line">{lineTwo}</span>
+      <span class="hero-line hero-accent">{lineThree}</span>
+    </h1>
+
+    <div class="hero-info">
+      <div class="hero-copy">
+        <p class="hero-sub">{hero.subtitle}</p>
+
+        <p class="availability">
+          <span class="availability-dot" aria-hidden="true"></span>
+          {hero.availability}
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn-primary" href={hero.ctas.work.href}>
+            {hero.ctas.work.label}
+            <svg
+              class="icon"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M6 2v8M2.5 6.5 6 10l3.5-3.5"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="square"
+              ></path>
+            </svg>
+          </a>
+          <a class="btn-secondary" href={hero.ctas.email.href}>
+            {hero.ctas.email.label}
+            <svg
+              class="icon"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M3.5 8.5 8.5 3.5M4.5 3.5h4v4"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="square"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-aside">
+        <ModelCard />
+      </div>
     </div>
   </div>
 </section>

@@ -4,10 +4,10 @@ import { site } from "../data/site";
 
 <section class="section" id="experience" aria-labelledby="experience-title">
   <div class="wrap">
-    <div class="section-head" data-reveal>
+    <div class="section-head">
       <div class="section-head-main">
         <p class="section-label">
-          <span class="section-label-num">03</span>
+          <span class="section-label-num">04</span>
           <span aria-hidden="true">/</span>
           Experience
         </p>
@@ -18,14 +18,17 @@ import { site } from "../data/site";
       </p>
     </div>
 
+    <div class="experience-head" aria-hidden="true">
+      <span>Period</span>
+      <span>Role / Org</span>
+      <span>Contribution</span>
+      <span>Location</span>
+    </div>
+
     <ol class="experience-list">
       {
-        site.experience.map((item, index) => (
-          <li
-            class:list={["experience-row", { "is-current": item.current }]}
-            data-reveal
-            style={`--i: ${index}`}
-          >
+        site.experience.map((item) => (
+          <li class:list={["experience-row", { "is-current": item.current }]}>
             <p class="experience-dates">{item.dates}</p>
 
             <div class="experience-main">
@@ -33,14 +36,11 @@ import { site } from "../data/site";
                 {item.title}
                 {item.current && <span class="current-tag">Current</span>}
               </h3>
-              <p class="experience-org">
-                <span>{item.org}</span>
-                <span class="experience-sep" aria-hidden="true">·</span>
-                <span>{item.location}</span>
-              </p>
+              <p class="experience-org">{item.org}</p>
             </div>
 
             <p class="experience-contribution">{item.contribution}</p>
+            <p class="experience-location">{item.location}</p>
           </li>
         ))
       }

@@ -2,7 +2,14 @@
 import { site } from "../data/site";
 ---
 
-<header class="site-header" data-header>
+<header class="site-header">
+  <div class="utility-strip">
+    <div class="wrap utility-inner">
+      <span>{site.shortName.toUpperCase()} / PORTFOLIO {site.footer.year}</span>
+      <span>BANDUNG, ID / {site.timezone}</span>
+    </div>
+  </div>
+
   <div class="wrap header-inner">
     <a class="brand" href="#top" aria-label={`${site.shortName} — back to top`}>
       <span class="brand-mark" aria-hidden="true"></span>
@@ -12,10 +19,13 @@ import { site } from "../data/site";
     <nav class="header-nav" aria-label="Primary">
       <ul class="nav-list">
         {
-          site.nav.map((item) => (
+          site.nav.map((item, index) => (
             <li>
               <a href={item.href} data-nav-link>
-                {item.label}
+                <span class="nav-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span>{item.label}</span>
               </a>
             </li>
           ))
@@ -125,10 +135,13 @@ import { site } from "../data/site";
     <nav class="menu-nav" aria-label="Mobile">
       <ul>
         {
-          site.nav.map((item) => (
+          site.nav.map((item, index) => (
             <li>
               <a href={item.href} data-nav-link>
-                {item.label}
+                <span class="nav-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span>{item.label}</span>
               </a>
             </li>
           ))

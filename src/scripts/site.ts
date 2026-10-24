@@ -1,6 +1,3 @@
-const prefersReducedMotion = () =>
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 const THEME_KEY = "theme";
 
 const getStoredTheme = (): "light" | "dark" | null => {
@@ -55,44 +52,6 @@ const initTheme = () => {
   }
 };
 
-const initReveal = () => {
-  const elements = Array.from(
-    document.querySelectorAll<HTMLElement>("[data-reveal]"),
-  );
-
-  if (!elements.length) return;
-
-  if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
-    elements.forEach((element) => element.classList.add("is-revealed"));
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-revealed");
-        observer.unobserve(entry.target);
-      });
-    },
-    { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
-  );
-
-  elements.forEach((element) => observer.observe(element));
-};
-
-const initHeader = () => {
-  const header = document.querySelector<HTMLElement>("[data-header]");
-  if (!header) return;
-
-  const update = () => {
-    header.classList.toggle("is-scrolled", window.scrollY > 8);
-  };
-
-  update();
-  window.addEventListener("scroll", update, { passive: true });
-};
-
 const initMenu = () => {
   const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
   const panel = document.querySelector<HTMLElement>("[data-menu-panel]");
@@ -142,7 +101,7 @@ const initMenu = () => {
     if (!panel.contains(target) && !toggle.contains(target)) setOpen(false);
   });
 
-  const wide = window.matchMedia("(min-width: 760px)");
+  const wide = window.matchMedia("(min-width: 761px)");
   if (typeof wide.addEventListener === "function") {
     wide.addEventListener("change", (event) => {
       if (event.matches) setOpen(false);
@@ -173,13 +132,31 @@ const initActiveNav = () => {
     });
   };
 
+  const visibleSections = new Map<string, number>();
+
+  const clearCurrent = () => {
+    links.forEach((link) => link.removeAttribute("aria-current"));
+  };
+
   const observer = new IntersectionObserver(
     (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleSections.set(entry.target.id, entry.intersectionRatio);
+        } else {
+          visibleSections.delete(entry.target.id);
+        }
+      });
 
-      if (visible[0]) setCurrent(visible[0].target.id);
+      if (!visibleSections.size) {
+        clearCurrent();
+        return;
+      }
+
+      const [current] = [...visibleSections.entries()].sort(
+        (a, b) => b[1] - a[1],
+      );
+      if (current) setCurrent(current[0]);
     },
     {
       rootMargin: "-40% 0px -50% 0px",
@@ -192,8 +169,6 @@ const initActiveNav = () => {
 
 const init = () => {
   initTheme();
-  initReveal();
-  initHeader();
   initMenu();
   initActiveNav();
 };

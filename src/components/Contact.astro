@@ -4,14 +4,14 @@ import { site } from "../data/site";
 
 <section class="contact" id="contact" aria-labelledby="contact-title">
   <div class="wrap">
-    <p class="section-label section-label-ink" data-reveal>
-      <span class="section-label-num">04</span>
+    <p class="section-label">
+      <span class="section-label-num">05</span>
       <span aria-hidden="true">/</span>
       Contact
     </p>
 
     <div class="contact-grid">
-      <div class="contact-main" data-reveal style="--i: 1">
+      <div class="contact-main">
         <h2 id="contact-title">{site.contact.title}</h2>
         <p class="contact-copy">{site.contact.copy}</p>
 
@@ -34,15 +34,11 @@ import { site } from "../data/site";
         </a>
       </div>
 
-      <div class="contact-side" data-reveal style="--i: 2">
+      <div class="contact-side">
         <p class="contact-side-label">Elsewhere</p>
 
         <div class="contact-links">
-          <a
-            href={site.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={site.linkedin} target="_blank" rel="noopener noreferrer">
             LinkedIn
             <span class="sr-only"> (opens in a new tab)</span>
           </a>

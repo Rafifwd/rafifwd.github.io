@@ -59,7 +59,7 @@ export const site = {
       'AI/ML engineer and full-stack product builder. CS undergraduate at Universitas Padjadjaran building explainable ML systems and the products around them.',
     canonical: 'https://rafifwd.github.io/',
     ogImage: 'https://rafifwd.github.io/og.png',
-    themeColor: '#F4EFE6',
+    themeColor: '#F3F2ED',
   },
 
   links: {

@@ -7,67 +7,80 @@ Single-page portfolio for Muhammad Rafif Widyadhana, built with Astro 5 and Type
 - Astro 5 (static output)
 - TypeScript (strict)
 - Hand-written CSS, no framework
-- Self-hosted fonts via `@fontsource`: Instrument Serif, Geist Variable, JetBrains Mono
+- Self-hosted fonts via `@fontsource`: Space Grotesk Variable, Geist Variable, JetBrains Mono
 
 ## Design notes
 
-The site uses an editorial / research identity: warm paper, ink text, one
-burnt-sienna accent, serif display type, a grotesk body face, and monospace
-metadata. Layouts use an asymmetric 12-column grid with hairline rules and
-generous whitespace.
+The site follows the **Signal Index** direction: a Swiss/technical portfolio
+index built on strict 12-column discipline, sharp corners, hairline rules, mono
+metadata, an oversized Space Grotesk poster headline, one electric cobalt
+signal, and a full-bleed cobalt contact block. It should read like a precise
+printed index or technical dossier rather than a card-based landing page.
 
-A dark editorial theme mirrors the light one with warm near-black paper and
-bone ink. The header theme button (moon in light, sun in dark) toggles it; the
+The light theme is warm paper (`#F3F2ED`) with near-black ink and cobalt
+(`#1F3CFF`) as the only accent. A dark theme mirrors it with near-black paper,
+bone ink, and a lighter cobalt (`#8C9BFF`) for text and controls. The contact
+block stays saturated cobalt in both themes (`#1F3CFF` light, `#2B45FF` dark)
+with white type. The footer sits below it as a fixed black bar with bone text
+in both themes.
+
+The header theme button (moon in light, sun in dark) toggles the theme; the
 first visit defaults to the operating system's `prefers-color-scheme`, and a
 manual choice is stored under the `theme` localStorage key (`light` / `dark`).
-The closing contact/footer block intentionally inverts against the page: a
-light page closes in dark ink, a dark page closes in light paper.
+A blocking inline script applies the theme before paint, and the
+`meta[name="theme-color"]` value is kept in sync with the active paper color.
 
 ### Tokens
 
 Defined at the top of [`src/styles/global.css`](src/styles/global.css):
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `--paper` | `#F4EFE6` | Page background |
-| `--paper-deep` | `#EAE3D6` | Figure wells |
-| `--paper-raised` | `#FAF7F0` | Model card surface |
-| `--ink` | `#15140F` | Primary text, ink buttons |
-| `--ink-2` | `#3E3A31` | Secondary text |
-| `--muted` | `#6C6557` | Metadata |
-| `--rule` / `--rule-strong` | `#D8CEBC` / `#B9AD97` | Hairlines |
-| `--accent` | `#A63A1B` | Links, marks, highlights |
-| `--on-ink` | `#F4EFE6` | Text on ink-colored buttons |
-| `--contact-bg` / `--contact-fg` | `#15140F` / `#F4EFE6` | Closing contact panel and footer |
-| `--contact-muted` / `--contact-accent` | `#B9AD97` / `#E8896B` | Contact metadata and links |
-| `--contact-rule` | `rgba(244, 239, 230, 0.16)` | Contact/footer hairlines |
+| Token | Light | Dark | Use |
+| --- | --- | --- | --- |
+| `--paper` | `#F3F2ED` | `#0B0B0C` | Page background |
+| `--paper-2` | `#E9E8E1` | `#141416` | Row hover, figure wells |
+| `--paper-raised` | `#FAFAF7` | `#1A1A1D` | Raised figure fills |
+| `--ink` | `#0B0B0C` | `#F3F2ED` | Primary text |
+| `--ink-2` | `#2C2C2F` | `#D5D4CC` | Secondary text |
+| `--muted` | `#5C5C56` | `#A3A29A` | Metadata |
+| `--rule` / `--rule-strong` | `#D1D0C7` / `#9E9D94` | `#2A2A2D` / `#4A4A4F` | Hairlines |
+| `--accent` | `#1F3CFF` | `#8C9BFF` | Cobalt signal, links, marks |
+| `--on-accent` | `#FFFFFF` | `#0B0B0C` | Text on accent fills |
+| `--on-ink` | `#F3F2ED` | `#0B0B0C` | Text on ink surfaces |
+| `--contact-bg` / `--contact-fg` | `#1F3CFF` / `#FFFFFF` | `#2B45FF` / `#FFFFFF` | Contact block |
+| `--contact-muted` | `#D7DCFF` | `#D7DCFF` | Contact copy and metadata |
+| `--contact-rule` | `rgba(255, 255, 255, 0.28)` | `rgba(255, 255, 255, 0.28)` | Contact hairlines |
+| `--footer-bg` / `--footer-fg` | `#0B0B0C` / `#F3F2ED` | `#0B0B0C` / `#F3F2ED` | Fixed footer bar |
 
-Dark values live in the `:root[data-theme="dark"]` block directly below the
-light block: the same token names are redefined (paper, ink, rules, accent,
-contact panel, shadows). Add a new token to both blocks, and to both
-`--contact-*` groups when it affects the closing panel, so the themes stay in
-sync. `color-scheme` is set per theme for native form controls and scrollbars.
+Add a new theme token to both theme blocks, and to both `--contact-*` groups
+when it affects the closing panel. The fixed footer tokens live only in
+`:root`, so the closing bar stays fixed across themes. `color-scheme` is set
+per theme for native controls and scrollbars.
 
-Type: Instrument Serif for display, Geist Variable for body/UI, JetBrains Mono
-for labels and metadata. Body copy is 17px on mobile and 18px from 900px up.
+Type: Space Grotesk Variable for the uppercase display poster, Geist Variable
+for body/UI, and JetBrains Mono for labels and metadata. Body copy is 17px on
+mobile and 18px from 900px up. All fonts are self-hosted.
 
 ### Sections
 
-1. Hero with a 7/5 split and an editorial model card.
-2. `01 / Selected work` — three alternating project rows with custom inline SVG figures.
-3. `02 / About` — prose, facts, and three capability columns.
-4. `03 / Experience` — hairline rows for roles and contributions.
-5. `04 / Contact` — full-bleed ink panel, closed by the footer.
+1. `01 / Intro` — full-width poster headline, lede and actions in seven columns,
+   borderless model dossier in five.
+2. `02 / Selected work` — a ruled case index; each project is one row with a
+   four-column inline SVG technical plate.
+3. `03 / About` — seven-column statement, four-row spec table, and a three-column
+   ruled capabilities table.
+4. `04 / Experience` — a hairline table with period, role/org, contribution, and
+   location.
+5. `05 / Contact` — full-bleed cobalt block with the giant email link, followed
+   by a fixed black footer.
 
 ### Motion
 
-Reveals are opacity + 18px translate transitions triggered once by
-IntersectionObserver, with an optional `--i` stagger. The header gains a border
-and shadow after 8px of scroll. The mobile menu, active navigation state, and
-theme toggle are handled in [`src/scripts/site.ts`](src/scripts/site.ts). A
-blocking inline script in [`src/layouts/BaseLayout.astro`](src/layouts/BaseLayout.astro)
-sets the theme before paint so system-dark visitors get no flash. All animation
-and transforms are disabled under `prefers-reduced-motion`.
+There are no scroll reveals; content is readable immediately. Hover and focus
+transitions run at 140–180ms, the theme change is instant, and all motion is
+disabled under `prefers-reduced-motion`. The mobile menu, active navigation
+state, theme toggle, inert/scroll-lock behavior, and no-JS fallback are handled
+in [`src/scripts/site.ts`](src/scripts/site.ts) and the blocking inline script
+in [`src/layouts/BaseLayout.astro`](src/layouts/BaseLayout.astro).
 
 ## Local development
 
@@ -104,8 +117,10 @@ Do not add a phone number or street-level address to this site.
 
 ## Assets
 
-- `public/favicon.svg` — paper rounded square, ink serif `r`, accent dot.
-- `public/og.svg` — 1200×630 source with embedded font subsets.
+- `public/favicon.svg` — ink square, cobalt hairline, bone grotesk `r`, cobalt
+  signal square.
+- `public/og.svg` — 1200×630 source with embedded Space Grotesk and JetBrains
+  Mono subsets.
 - `public/og.png` — 1200×630 export of the same layout.
 
 ## Deploying to GitHub Pages
